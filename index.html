@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JK MOBILE</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14302B">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F5F3;--card:#fff;--ink:#14302B;--mute:#5E726D;--line:#D5DFDB;--acc:#E8A317;--accink:#2B1E00;--pri:#14302B;--priink:#fff;--bad:#B3261E;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1A18;--card:#17282500;--card:#172825;--ink:#E7F0ED;--mute:#93A9A3;--line:#2B403B;--pri:#E8A317;--priink:#2B1E00}}
+:root[data-theme="dark"]{--bg:#0E1A18;--card:#172825;--ink:#E7F0ED;--mute:#93A9A3;--line:#2B403B;--pri:#E8A317;--priink:#2B1E00}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans Tamil',system-ui,sans-serif;line-height:1.6}
+main{max-width:560px;margin:0 auto;padding:0 14px 40px}
+header{display:flex;align-items:center;gap:12px;padding:16px 0 10px}
+.logo{width:46px;height:46px;border-radius:13px;background:var(--pri);display:grid;place-items:center;flex:none}
+.logo svg{width:28px;height:28px}
+h1{font-size:22px;font-weight:800;margin:0;line-height:1.2}
+header p{margin:0;color:var(--mute);font-size:13px}
+nav{display:flex;gap:6px;background:var(--line);padding:4px;border-radius:12px;margin:6px 0 14px}
+nav button{flex:1;border:0;background:none;color:var(--ink);font:600 15px inherit;font-family:inherit;padding:9px;border-radius:9px;cursor:pointer}
+nav button.on{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+h2{font-size:17px;margin:0 0 10px}
+label{display:block;font-size:14px;font-weight:600;margin:12px 0 4px}
+input{width:100%;font:16px inherit;font-family:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+input:focus,button:focus-visible,canvas:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sig{position:relative}
+canvas{width:100%;height:130px;display:block;border:1.5px dashed var(--mute);border-radius:10px;background:#fff;touch-action:none}
+.sig small{position:absolute;left:10px;top:6px;color:#8a9a96;font-size:12px;pointer-events:none}
+.link{background:none;border:0;color:var(--mute);font:13px inherit;font-family:inherit;text-decoration:underline;cursor:pointer;padding:4px 0}
+.btn{width:100%;border:0;background:var(--pri);color:var(--priink);font:800 17px inherit;font-family:inherit;padding:14px;border-radius:12px;cursor:pointer;margin-top:6px}
+.mnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mnav button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px;cursor:pointer}
+.mnav b{font-size:19px}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sum div{background:var(--pri);color:var(--priink);border-radius:14px;padding:12px 14px}
+.sum span{display:block;font-size:13px;opacity:.8}.sum strong{font-size:24px}
+.day{display:flex;justify-content:space-between;font-weight:800;margin:16px 2px 6px}
+.day span{color:var(--mute);font-weight:600;font-size:13px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+summary{padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;font-weight:600}
+summary em{font-style:normal;color:var(--mute);font-weight:400;font-size:13px;display:block}
+.det{padding:0 14px 14px;font-size:14px}
+.det p{margin:4px 0}.det img{width:100%;max-width:240px;height:90px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:8px;display:block}
+.del{color:var(--bad);background:none;border:1px solid var(--bad);border-radius:8px;padding:6px 12px;font:600 13px inherit;font-family:inherit;cursor:pointer;margin-top:10px}
+.empty{text-align:center;color:var(--mute);padding:30px 10px}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<main>
+<header>
+ <div class="logo"><svg viewBox="0 0 32 32" fill="none"><rect x="9" y="3" width="14" height="26" rx="3.5" stroke="#E8A317" stroke-width="2.4"/><circle cx="16" cy="22.5" r="1.4" fill="#E8A317"/><g stroke="#E8A317" stroke-width="2.2" stroke-linecap="round"><path d="M16 8.5v7"/><path d="M12.8 12.2L16 15.5l3.2-3.3"/></g></svg></div>
+ <div><h1>JK MOBILE</h1><p>மொபைல் விற்பனைப் பதிவு</p></div>
+</header>
+<nav><button id="t1" class="on">புதிய விற்பனை</button><button id="t2">மாதப் பதிவு</button></nav>
+
+<section id="p1">
+ <div class="card">
+  <h2>மொபைல் விற்பனை</h2>
+  <label for="date">தேதி</label><input id="date" type="date">
+  <label for="model">மொபைல் மாடல் நம்பர்</label><input id="model" autocomplete="off">
+  <div class="row">
+   <div><label for="i1">IMEI நம்பர் 1</label><input id="i1" inputmode="numeric" maxlength="15"></div>
+   <div><label for="i2">IMEI நம்பர் 2</label><input id="i2" inputmode="numeric" maxlength="15"></div>
+  </div>
+  <label for="price">விலை (₹)</label><input id="price" inputmode="numeric">
+ </div>
+ <div class="card">
+  <h2>ஓனர்</h2>
+  <label for="on">ஓனர் பெயர்</label><input id="on">
+  <label>ஓனர் கையொப்பம்</label>
+  <div class="sig"><canvas id="c1" tabindex="0" aria-label="ஓனர் கையொப்பம்"></canvas><small>இங்கே கையொப்பமிடவும்</small></div>
+  <button class="link" data-clr="1">அழி</button>
+ </div>
+ <div class="card">
+  <h2>கஸ்டமர்</h2>
+  <label for="cn">கஸ்டமர் பெயர்</label><input id="cn">
+  <label>கஸ்டமர் கையொப்பம்</label>
+  <div class="sig"><canvas id="c2" tabindex="0" aria-label="கஸ்டமர் கையொப்பம்"></canvas><small>இங்கே கையொப்பமிடவும்</small></div>
+  <button class="link" data-clr="2">அழி</button>
+ </div>
+ <button class="btn" id="save">விற்பனையைச் சேமி</button>
+</section>
+
+<section id="p2" hidden>
+ <div class="mnav"><button id="pv" aria-label="முந்தைய மாதம்">‹</button><b id="mt"></b><button id="nx" aria-label="அடுத்த மாதம்">›</button></div>
+ <div class="sum"><div><span>மொத்த விற்பனை</span><strong id="cnt">0</strong></div><div><span>மொத்தத் தொகை</span><strong id="tot">₹0</strong></div></div>
+ <div id="list"></div>
+</section>
+</main>
+<div id="toast" role="status"></div>
+<script>
+var K='gk_sales',sales=[];
+try{sales=JSON.parse(localStorage.getItem(K))||[]}catch(e){}
+function persist(){try{localStorage.setItem(K,JSON.stringify(sales))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2200)}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+$('date').value=today();
+
+function Pad(cv){
+ var ctx=cv.getContext('2d'),dr=false,self=this;this.empty=true;
+ function size(){var r=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*r;cv.height=h*r;ctx.scale(r,r);ctx.lineWidth=2.2;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#14302B'}
+ size();
+ function pt(e){var b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]}
+ cv.addEventListener('pointerdown',function(e){dr=true;cv.setPointerCapture(e.pointerId);var p=pt(e);ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(p[0]+.1,p[1]);ctx.stroke();self.empty=false;cv.previousElementSibling;cv.nextElementSibling.style.display='none'});
+ cv.addEventListener('pointermove',function(e){if(!dr)return;var p=pt(e);ctx.lineTo(p[0],p[1]);ctx.stroke()});
+ ['pointerup','pointercancel'].forEach(function(n){cv.addEventListener(n,function(){dr=false})});
+ this.clear=function(){ctx.clearRect(0,0,cv.width,cv.height);self.empty=true;cv.nextElementSibling.style.display=''};
+ this.data=function(){return cv.toDataURL('image/png')};
+}
+var pads={1:new Pad($('c1')),2:new Pad($('c2'))};
+document.querySelectorAll('[data-clr]').forEach(function(b){b.onclick=function(){pads[b.dataset.clr].clear()}});
+
+function tab(n){$('p1').hidden=n!=1;$('p2').hidden=n!=2;$('t1').classList.toggle('on',n==1);$('t2').classList.toggle('on',n==2);if(n==2)render()}
+$('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
+
+$('save').onclick=function(){
+ var f={date:$('date').value,model:$('model').value.trim(),i1:$('i1').value.trim(),i2:$('i2').value.trim(),price:Number($('price').value)||0,on:$('on').value.trim(),cn:$('cn').value.trim()};
+ if(!f.date||!f.model){toast('தேதி, மாடல் நம்பர் தேவை');return}
+ if(!f.i1){toast('IMEI நம்பர் 1 தேவை');return}
+ if(!f.on||!f.cn){toast('ஓனர், கஸ்டமர் பெயர்களை உள்ளிடவும்');return}
+ if(pads[1].empty||pads[2].empty){toast('இரண்டு கையொப்பங்களும் தேவை');return}
+ f.id=Date.now();f.s1=pads[1].data();f.s2=pads[2].data();
+ sales.push(f);persist();
+ ['model','i1','i2','price','on','cn'].forEach(function(i){$(i).value=''});
+ pads[1].clear();pads[2].clear();
+ var d=f.date.split('-');cur={y:+d[0],m:+d[1]-1};
+ toast('சேமிக்கப்பட்டது');tab(2);
+};
+
+var now=new Date(),cur={y:now.getFullYear(),m:now.getMonth()};
+var MN=['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'];
+$('pv').onclick=function(){cur.m--;if(cur.m<0){cur.m=11;cur.y--}render()};
+$('nx').onclick=function(){cur.m++;if(cur.m>11){cur.m=0;cur.y++}render()};
+
+function render(){
+ $('mt').textContent=MN[cur.m]+' '+cur.y;
+ var pre=cur.y+'-'+String(cur.m+1).padStart(2,'0');
+ var ms=sales.filter(function(s){return s.date.indexOf(pre)==0}).sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:b.id-a.id});
+ $('cnt').textContent=ms.length;
+ $('tot').textContent='₹'+ms.reduce(function(a,s){return a+s.price},0).toLocaleString('en-IN');
+ if(!ms.length){$('list').innerHTML='<div class="empty">இந்த மாதம் பதிவு இல்லை.<br>“புதிய விற்பனை” பக்கத்தில் முதல் விற்பனையைச் சேர்க்கவும்.</div>';return}
+ var h='',last='';
+ ms.forEach(function(s){
+  if(s.date!==last){last=s.date;var dd=ms.filter(function(x){return x.date===s.date});
+   var p=s.date.split('-');h+='<div class="day">'+(+p[2])+' '+MN[cur.m]+'<span>'+dd.length+' விற்பனை · ₹'+dd.reduce(function(a,x){return a+x.price},0).toLocaleString('en-IN')+'</span></div>'}
+  h+='<details><summary><div>'+esc(s.model)+'<em>'+esc(s.cn)+'</em></div><div>'+(s.price?'₹'+s.price.toLocaleString('en-IN'):'')+'</div></summary><div class="det">'
+   +'<p>IMEI 1: <b>'+esc(s.i1)+'</b></p><p>IMEI 2: <b>'+esc(s.i2||'—')+'</b></p>'
+   +'<p>ஓனர்: <b>'+esc(s.on)+'</b></p><img alt="ஓனர் கையொப்பம்" src="'+s.s1+'">'
+   +'<p>கஸ்டமர்: <b>'+esc(s.cn)+'</b></p><img alt="கஸ்டமர் கையொப்பம்" src="'+s.s2+'">'
+   +'<button class="del" data-id="'+s.id+'">நீக்கு</button></div></details>'});
+ $('list').innerHTML=h;
+ $('list').querySelectorAll('.del').forEach(function(b){b.onclick=function(){
+  if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='உறுதி செய்ய மீண்டும் தட்டவும்';return}
+  sales=sales.filter(function(s){return s.id!=b.dataset.id});persist();render();toast('நீக்கப்பட்டது')}});
+}
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+</script>
+</body>
+</html>
